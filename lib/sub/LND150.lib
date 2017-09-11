@@ -1,0 +1,25 @@
+*--------------------------------
+*Supertex LND150
+*created by Matthew Helyar
+*09-Jun-2012
+*Version 1.0.0
+*--------------------------------
+*The Supertex LND150 is a popular hobbyist transistor because it is depletion 
+*mode, N-channel and has similar working voltage and current ranges and similar 
+*transconductance to small thermionic valves (vacuum tubes).
+*
+*However the only spice model available as far as I have seen is an NMOS model 
+*from the manufacturer. If this was the heart of a subcircuit model, that would 
+*be fine, but on its own it's completely inadequate. Without any extra components 
+*of a subcircuit, its characteristic curves are way off, as are its capacitances, 
+*so it's not much use to hobbyists. I therefore remade the model from the 
+*datasheet as a simpler VDMOS model.
+*
+*Gfs and Rds(on) are the typical values from the datasheet of 2mS and 850R 
+*respectively.
+*
+*Source resistance and body diode parameters are not included and will
+*revert to default values.
+*--------------------------------
+*
+.MODEL LND150 VDMOS (Rd=450 VTO=-1.35 Kp=2m Cgdmax=1p Cgdmin=0.25p Cgs=7.5p)

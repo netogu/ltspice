@@ -1,0 +1,34 @@
+* PSFB PWM GENERATOR
+* Ernesto Gonzalez Urdaneta 12/02/2016
+
+.SUBCKT PSFB_PWM PWM A B C D
+
+.param
++ dt  = 100n
++ Rdt = dt/(0.693*1n)
++ Fsw = 100k
++ Tsw = 1/Fsw
+
+V1 n_pwm_clk 0 PULSE(0 1 0 1p 1p {Tsw*0.90} {Tsw})
+A1 0 n_pwm_clk 0 PWM 0 N008 0 0 AND tau=1n
+A2 0 N001 N008 0 0 0 reset 0 AND tau=1n
+A3 0 N003 N008 0 0 0 set 0 AND tau=1n
+A4 N001 0 n_pwm_clk 0 0 0 N003 0 DFLOP tau=1n
+A5 0 N007 reset 0 0 N005 0 0 OR tau=1n
+A6 0 N005 set 0 0 N007 0 0 OR tau=1n
+A7 0 N006 N005 0 0 0 D 0 AND tau=1n
+A8 0 N007 0 N009 0 0 C 0 AND tau=1n
+C1 N009 0 1n
+R1 N009 N007 {Rdt}
+C2 N006 0 1n
+R2 N006 N005 {Rdt}
+A9 0 N002 N001 0 0 0 A 0 AND tau=1n
+A10 0 N003 0 N004 0 0 B 0 AND tau=1n
+C3 N004 0 1n
+R3 N004 N003 {Rdt}
+C4 N002 0 1n
+R4 N002 N001 {Rdt}
+A11 N003 0 0 0 0 N001 0 0 BUF
+
+.ends
+

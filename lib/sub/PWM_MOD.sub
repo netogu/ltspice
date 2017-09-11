@@ -1,0 +1,17 @@
+* PWM MODULATOR
+* Ernesto Gonzalez Urdaneta 12/02/2016
+
+.SUBCKT PWM_MOD Vc PWM
+V1 ramp 0 PULSE(0 1 0 {Tsw} 0 0 {Tsw})
+B1 Vclim 0 V=if(V(Vc)>{DCmax},{DCmax},if(V(Vc)<{DCmin},{Dcmin},V(Vc)))
+B2 PWM 0 V=if(V(Vclim)>V(ramp),1,0)
+
+
+.param
++ Fsw = 100k
++ Tsw = 1/Fsw
++ VM = 1
++ DCmax = 1
++ DCmin = 0
+
+.ends

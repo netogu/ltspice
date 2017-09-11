@@ -1,0 +1,37 @@
+*Oct 15, 2012
+*ECN S12-2415, Rev. B
+*File Name: SQM85N15-19_PS.txt, SQM85N15-19_PS.lib
+*This document is intended as a SPICE modeling guideline and does not
+*constitute a commercial product datasheet. Designers should refer to the
+*appropriate datasheet of the same number for guaranteed specification
+*limits
+
+.SUBCKT SQM85N15-19 drain gate source 
+M1 3 GX source source NMOS W= 9711623u L= 0.25u 
+M2 source GX source drain PMOS W= 9711623u L= 6.548e-07 
+R1 drain 3 1.596e-02 TC=8.277e-03 2.435e-05 
+CGS GX source 3.953e-09 
+CGD GX drain 4.824e-11 
+RG gate GY 1m 
+RTCV 100 source 1e6 TC=3.346e-04 -7.463e-06 
+ETCV GX GY 100 200 1 
+ITCV source 100 1u 
+VTCV 200 source 1 
+DBD source drain DBD 
+**************************************************************** 
+.MODEL NMOS NMOS ( LEVEL = 3 TOX = 10e-8 
++ RS = 5.000e-04 KP = 3.526e-06 NSUB = 8.315e+16 
++ KAPPA = 2.593e-02 ETA = 2.417e-07 NFS = 1.169e+12 
++ LD = 0 IS = 0 TPG = 1) 
+*************************************************************** 
+.MODEL PMOS PMOS ( LEVEL = 3 TOX = 10e-8 
++NSUB = 1.933e+15 IS = 0 TPG = -1 ) 
+**************************************************************** 
+.MODEL DBD D ( 
++FC = 0.1 TT = 1.000e-08 T_MEASURED = 25 BV = 152 
++RS = 1.621e-03 N = 1.038e+00 IS = 1.574e-11 
++EG = 1.207e+00 XTI = 6.614e-01 TRS1 = 4.407e-03 
++CJO = 2.000e-09 VJ = 8.392e-01 M = 5.556e-01 ) 
+.ENDS SQM85N15-19 
+
+
